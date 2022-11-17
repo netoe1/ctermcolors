@@ -7,8 +7,13 @@
  */
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
-#define OS 0 /*if u using windows, turn this value to 1!*/
+
+typedef enum SYSTYPE{WINDOWS,LINUX} __SYSTYPE;
+void clearTerminalOS(__SYSTYPE os);
+void putscolored(const char *color, const char *message,__SYSTYPE os);
+
 //Regular text
 #define BLK "\e[0;30m"
 #define RED "\e[0;31m"
@@ -84,22 +89,35 @@
 #define CRESET "\e[0m"
 #define COLOR_RESET "\e[0m"
 
-void putscolored(const char *color, const char *message)
-{
-	puts(color);
-	puts(message);
-	puts(reset);
-}
 
-void clearTerminalOS(const char *_os)
+
+
+void clearTerminalOS(__SYSTYPE os)
 {
-	if(os == 1)
+	if(os == WINDOWS)
 	{
 		system("clear");
 		return;
 	}
 	
 	system("cls");
+}
+
+void putscolored(const char *color, const char *message,__SYSTYPE os)
+{
+
+	if(os != WINDOWS){
+		puts(color);
+		clearTerminalOS(os);
+		puts(message);	
+		return 0;
+	}
+
+	printf("\nWe havent this service in Windows yet.");
+
+
 	
 }
+	
+
 

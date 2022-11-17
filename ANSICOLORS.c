@@ -3,8 +3,7 @@
 
 main()
 {
-	puts("Ely Torres Neto");
-	puts("fuck U");
-	
+	putscolored(RED,"Ely Torres Neto",WINDOWS);
+	getchar();
 	return 0;
 }
